@@ -80,26 +80,48 @@
 
         <section>
           <blockquote>Architecture is about intent, not your framework.</blockquote>
-          <small>-Bob Martin</small>
+          <small>
+            -Bob Martin
+            <a href="http://www.youtube.com/watch?v=WpkDN78P884">Architecture, the Lost Years</a>
+          </small>
         </section>
 
 
         <section>
-          <blockquote>The boundaries of your program ARE your program in a very real sense.</blockquote>
-          <small>-Gary Bernhardt</small>
+          <blockquote>
+            The boundaries of your program ARE your program in a very real sense.
+          </blockquote>
+          <small>
+            -Gary Bernhardt
+            <a href="http://www.destroyallsoftware.com">Destroy All Software</a>
+          </small>
+        </section>
+
+
+        <section>
+          <blockquote>
+            My test doesn't know, doesn't wanna know.  It doesn't care, doesn't 
+            wanna care.  We're just programming to the interface.
+          </blockquote>
+          <small>
+            -Mark Trostler
+            <a href="http://www.youtube.com/watch?v=JjqKQ8ezwKQ">Testable Javascript</a>
+          </small>
         </section>
 
 
         <section>
           <blockquote>Divide and conquer.</blockquote>
           <small>-Phillip II, King of Macedon</small>
-          
         </section>
 
 
         <section>
           <blockquote>Be the ball Danny.  Be the ball.</blockquote>
-          <small>-Ty Webb (fictional philosopher)</small>
+          <small>
+            -Ty Webb (fictional philosopher)
+            <a href="http://www.youtube.com/watch?v=3gQwY5Np4FA">Caddy Shack</a>
+          </small>
         </section>
 
 
@@ -212,11 +234,9 @@
         <section>
           <h1>winning</h1>
           <ul class="no-bullet small-list">
-            <li>reusable</li>
-            <li>no unexpected side effects</li>
-            <li>no crazy dom reflows to apply your crazy jquery plugin</li>
             <li>declarative configuration</li>
-            <li>api is trivial to document</li>
+            <li>narrow API</li>
+            <li>reusable</li>
           </ul>
         </section>
 
@@ -231,10 +251,10 @@
 
 
         <section>
-          <h2>let's add an action</h2> 
+          <h2>Modify our code to use sendAction</h2> 
           <h4></h4>
 <pre><code class="stretch">
-  //snippet from our origin timetracker
+//snippet from our origin timetracker
   startTimer: function () {
     Ember.run.later(this, function () {
       var newTime = Date.now()
@@ -251,6 +271,12 @@
 </code></pre>
         </section>
         
+
+        <section>
+          <h2>What should we do with this data?</h2> 
+          <img src="images/data.jpg"></img>
+        </section>
+
 
         <section>
           <h2>localstorage?</h2> 
@@ -291,7 +317,7 @@
 
         <section>
           <h2>d3??!!</h2> 
-          <h4>here, we target another component</h4>
+          <h4>here, we target a parent component</h4>
 <pre><code class="stretch">
   App.timeGraphComponent = Ember.Component.extend({
     actions: {
