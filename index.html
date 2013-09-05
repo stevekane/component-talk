@@ -124,7 +124,7 @@
         <section>
 <pre><code class="stretch">
   //handlebars template
-  {{secondsviewed}}
+  {{secondsViewed}}
 </code></pre>
 
 <pre><code class="stretch">
@@ -184,11 +184,9 @@
           <h2>a fancy counter...so what</h2> 
           <h4>let's add some feedback</h4>
 <pre><code>
-  {{our-timetracker action="logtimestamp"}}
+  {{our-timetracker action="logTimeStamp"}}
 </code></pre>
-          <p>
-            action tells our component what method to "send" to its outer scope
-          <p>
+          <p>action tells our component what method to "send" to its outer scope</p>
         </section>
 
 
@@ -197,19 +195,19 @@
           <h4></h4>
 <pre><code class="stretch">
   //snippet from our origin timetracker
-  starttimer: function () {
-    ember.run.later(this, function () {
-      var newtime = date.now()
-        , oldtime = this.get('oldtime') || date.now()
-        , detams = newtime - oldtime;
+  startTimer: function () {
+    Ember.run.later(this, function () {
+      var newTime = Date.now()
+        , oldTime = this.get('oldTime') || Date.now()
+        , deltaMs = newTime - oldTime;
 
-      this.incrementproperty('msviewed', deltams);
+      this.incrementProperty('msViewed', deltaMs);
       //new
-      this.sendaction("action", this.get('msviewed'));
+      this.sendAction("action", this.get('msViewed'));
       //endnew
-      this.set('oldtime', newtime);
+      this.set('oldTime', newTime);
     }, 500);
-  }.on('didinsertelement')
+  }.on('didInsertElement')
 </code></pre>
         </section>
         
@@ -217,19 +215,19 @@
         <section>
           <h2>localstorage?</h2> 
 <pre><code class="stretch">
-  {{our-timetracker action="logtimestamp"}}
+  {{our-timetracker action="logTimeStamp"}}
 </code></pre>
 <pre><code class="stretch">
-  app.somecontroller = ember.controller.extend({
+  App.SomeController = Ember.Controller.extend({
     actions: {
-      logtimestamp: function (ms) {
-        var lstimestamps=localstorage['timestamps'] || "[]"
-          , timestamps=json.parse(lstimestamps)
-          , stringifiedtimestamps;
+      logTimeStamp: function (ms) {
+        var lsTimeStamps=localStorage['timestamps'] || "[]"
+          , timeStamps=JSON.parse(lsTimeStamps)
+          , stringifiedTimeStamps;
 
-        timestamps.push(ms);
-        stringifiedtimestamps=json.stringify(timestamps);
-        localstorage['timestamps']=stringifiedtimestamps);
+        timeStamps.push(ms);
+        stringifiedTimeStamps=JSON.stringify(timeStamps);
+        localStorage['timestamps']=stringifiedTimeStamps);
       }     
     }
   });  
@@ -240,9 +238,9 @@
         <section>
           <h2>websockets?!</h2> 
 <pre><code class="stretch">
-  app.somecontroller = ember.controller.extend({
+  App.SomeController = Ember.Controller.extend({
     actions: {
-      logtimestamp: function (ms) {
+      logTimeStamp: function (ms) {
         this.websocket.send(ms);
       }     
     }
@@ -255,9 +253,9 @@
           <h2>d3??!!</h2> 
           <h4>here, we target another component</h4>
 <pre><code class="stretch">
-  app.timegraphcomponent = ember.component.extend({
+  App.timeGraphComponent = Ember.Component.extend({
     actions: {
-      logtimestamp: function (ms) {
+      logTimeStamp: function (ms) {
         //weird d3 code belongs here
       }     
     }
@@ -272,18 +270,18 @@
 
 
         <section>
-          <h1>all the things!</h1>
-          <h4>let's modify our code so we can share our counter</h4>
+          <h1>All the things!</h1>
+          <h4>Let's modify our code so we can share our counter</h4>
         </section>
 
         <section>
-          <h2>change the template</h2> 
+          <h2>Change the template</h2> 
 <pre><code class="stretch">
   {{! some.handlebars }}
   {{! template for somecontroller and someview }}
 
-  {{our-timetracker action="logtimestamp" msviewed=view.msonpage}}
-  {{our-timegraph data=view.msonpage}}
+  {{our-timetracker action="logTimeStamp" msViewed=view.msOnPage}}
+  {{our-timegraph data=view.msOnPage}}
 </code></pre>
         </section>
 
@@ -291,8 +289,8 @@
         <section>
           <h2>change the javascript...</h2> 
 <pre><code class="stretch">
-  app.someview = ember.view.extend({
-    msonpage: 0 
+  App.SomeView = Ember.View.extend({
+    msOnPage: 0 
   });
 </code></pre>
         </section>
@@ -328,35 +326,35 @@
             bus may be useful to transfer messages between elements
           <p>
 <pre><code class="stretch">
-  {{our-timetracker outputbus=timebus}}
-  {{our-timegraph inputbus=timebus}}
+  {{our-timetracker outputBus=timeBus}}
+  {{our-timegraph inputBus=timeBus}}
 </code></pre>
         </section>
 
 
         <section>
 <pre><code class="stretch">
-  app.somecontroller = ember.controller.extend({
+  App.SomeController = Ember.Controller.extend({
     //not an ember builtin!
-    timebus: app.bus.create() 
+    timeBus: App.Bus.create()
   });
 
-  app.timetrackercomponent = ember.component.extend({
+  App.TimetrackerComponent = Ember.Component.extend({
     //psuedocode for brevity
-    ontick (ms): function () {
-      var outputbus = this.get('outputbus');
-      outputbus.push({
-        timestamp: ms,
-        otherdata: //something
+    onTick (ms): function () {
+      var outputBus = this.get('outputBus');
+      outputBus.push({
+        timeStamp: ms,
+        otherData: //something
       });
     }
   });
 
-  app.timegraphcomponent = ember.component.extend({
-    didinsertelement: function () {
-      var inputbus = this.get('inputbus');
-      inputbus.on('data', function (data) {
-        this.graph(data.timestamp);
+  App.TimegraphComponent = Ember.Component.extend({
+    didInsertElement: function () {
+      var inputBus = this.get('inputBus');
+      inputBus.on('data', function (data) {
+        this.graph(data.timeStamp);
       });
     }
   });
@@ -385,17 +383,16 @@
         <section>
           <h2>list the data models</h2>
           <ul class="no-bullet small-list">
-            <li>city</li>
-            <li>datetime</li>
-            <li>hourly weather data</li>
+            <li>City</li>
+            <li>DateTime</li>
+            <li>Hourly Weather Data</li>
               <ul>
-                <li>temperature</li>
+                <li>temderature</li>
                 <li>precipitation</li>
                 <li>humidity</li>
                 <li>wind speed</li>
                 <li>wind direction</li>
               </ul>
-            <li>aggregate daily overview</li>
           </ul>
         </section>
 
@@ -421,9 +418,8 @@
         , apiString = this.get('apiString');
 
       $.ajax(apiString+cityName+"/"+currentDateTime, settings)
-        .done(function (data) {
-          this.loadData(data); //load function, not shown
-        })
+        .done(this.loadData.bind(this));
+        .fail(this.raiseError.bind(this));
     }
   });
 </code></pre>
@@ -431,14 +427,19 @@
 
 
         <section>
-          <h2>Group your UI by data, purpose, location</h2> 
-          <img src="images/weather-groups.png"></img>  
+          <h1>Group your UI by data, purpose, location</h1>
         </section>
+
+
+        <section>
+          <img src="images/weather_base/weather_overview_child.jpg"></img>
+        </section>
+
 
         <section>
           <h2>Weather Overview Component</h2>
           <p>Computes current temperature</p>
-          <p>Displays cityName, activeDateTime, and temperature</p>
+          <p>Displays City Name, Current Date and Time, Summary</p>
 <pre><code>
   {{weather-overview
     cityName=cityName
@@ -447,12 +448,23 @@
 </code></pre>
         </section>
 
+
+        <section>
+          <img src="images/weather_base/daily_averages_child.jpg"></img>
+        </section>
+
+
         <section>
           <h2>Weather Daily Averages Component</h2>
           <p>Computes and displays average windspeed, humidity, precipitation</p>
 <pre><code>
   {{weather-daily-averages data=activeDaysData isMetric=isMetric}}
 </code></pre>
+        </section>
+
+
+        <section>
+          <img src="images/weather_base/weather_graphic_child.jpg"></img>
         </section>
 
 
