@@ -312,6 +312,8 @@ body {
 	display: block;
 	position: relative;
 	width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 
 	text-align: left;
 	font-size: 0.55em;

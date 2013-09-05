@@ -15,10 +15,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/xcode.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -145,6 +145,21 @@
         
 
         <section>
+          <img src="images/crazycontroller.jpg"></img> 
+        </section>
+
+
+        <section>
+          <img src="images/jackiechan.jpg"></img> 
+        </section>
+
+
+        <section>
+          <img src="images/normalcontroller.jpg"></img> 
+        </section>
+
+
+        <section>
           <h2>Liskov Substitution Principle</h2>
           <blockquote>
             Classes that implement the same interface may swap out implementations without 
@@ -218,23 +233,25 @@
 
         
         <section>
-          <h1>the inside is so messy...</h1>
-          <h3>let's see what it's like to use this class in ember..</h3>
+          <h1>The inside is so messy...</h1>
+          <h3>Let's see what it's like to use this class in ember..</h3>
         </section>
 
 
         <section>
-          <p>display time a user has spent on this view</p>
 <pre><code>
+  {{! display the time a user has spent on this view }}
+
   {{our-timetracker}}
 </code></pre>
         </section>
         
 
         <section>
-          <h1>winning</h1>
+          <h1>Winning</h1>
           <ul class="no-bullet small-list">
             <li>declarative configuration</li>
+            <li>single responsibility</li>
             <li>narrow API</li>
             <li>reusable</li>
           </ul>
@@ -246,13 +263,11 @@
 <pre><code>
   {{our-timetracker action="logTimeStamp"}}
 </code></pre>
-          <p>action tells our component what method to "send" to its outer scope</p>
         </section>
 
 
         <section>
           <h2>Modify our code to use sendAction</h2> 
-          <h4></h4>
 <pre><code class="stretch">
 //snippet from our origin timetracker
   startTimer: function () {
@@ -273,13 +288,13 @@
         
 
         <section>
-          <h2>What should we do with this data?</h2> 
+          <h2>What to do with this data?</h2> 
           <img src="images/data.jpg"></img>
         </section>
 
 
         <section>
-          <h2>localstorage?</h2> 
+          <h2>localStorage?</h2> 
 <pre><code class="stretch">
   {{our-timetracker action="logTimeStamp"}}
 </code></pre>
@@ -302,7 +317,7 @@
 
 
         <section>
-          <h2>websockets?!</h2> 
+          <h2>Websocket?!</h2> 
 <pre><code class="stretch">
   App.SomeController = Ember.Controller.extend({
     actions: {
@@ -316,10 +331,9 @@
 
 
         <section>
-          <h2>d3??!!</h2> 
-          <h4>here, we target a parent component</h4>
+          <h2>D3??!!</h2> 
 <pre><code class="stretch">
-  App.timeGraphComponent = Ember.Component.extend({
+  App.TimeGraphComponent = Ember.Component.extend({
     actions: {
       logTimeStamp: function (ms) {
         //weird d3 code belongs here
@@ -336,8 +350,7 @@
 
 
         <section>
-          <h1>All the things!</h1>
-          <h4>Let's modify our code so we can share our counter</h4>
+          <h1>Can this counter drive behavior elsewhere?</h1>
         </section>
 
         <section>
@@ -353,7 +366,7 @@
 
 
         <section>
-          <h2>change the javascript...</h2> 
+          <h2>Change the javascript...</h2> 
 <pre><code class="stretch">
   App.SomeView = Ember.View.extend({
     msOnPage: 0 
@@ -363,34 +376,23 @@
 
 
         <section>
-          <h1>...how?</h1> 
+          <h1>...How does this work?</h1> 
         </section>
 
 
         <section>
-          <h2>bound properties</h2> 
+          <h2>Bound properties</h2> 
 <pre><code class="stretch">
   {{our-timetracker action="logtimestamp" msviewed=msonpage}}
 </code></pre>
 <p>
-  in ember.js, parameters passed to components are "bound"<br><br>
-
   changes to bound properties are propagated to every part of your
-  app that depends on them...for free.<br><br>
-
-  this allows you to pass data into components, bind it in templates, 
-  or share it across entire routes and know that it will stay completely
-  in sync.   wow.
+  app that depends on them...for free.
 </p>
         </section>
 
         <section>
-          <h2>advanced communication - bus</h2>
-          <p>
-            sometimes, bound properties are not enough to facilitate communication
-            between components in your page.  in many of these situations, a very simple
-            bus may be useful to transfer messages between elements
-          <p>
+          <h2>Advanced communication - bus</h2>
 <pre><code class="stretch">
   {{our-timetracker outputBus=timeBus}}
   {{our-timegraph inputBus=timeBus}}
@@ -428,15 +430,16 @@
         </section>
 
         <section>
-          <h1>breathe</h1>
+          <h1>Breathe</h1>
+          <h4>Questions?</h4>
         </section>
 
 
         <section>
-          <h2>now the fun part...</h2>
-          <h4>let's break down a user interface<h4>
+          <h2>Now the fun part...</h2>
+          <h4>Let's break down a user interface<h4>
           <footer class="emphasis">
-            disclaimer: this section is focused on process over implementation
+            Disclaimer: This section is focused on process over implementation
           </footer>
         </section>
 
@@ -447,45 +450,37 @@
 
 
         <section>
-          <h2>list the data models</h2>
+          <h2>List the data models</h2>
           <ul class="no-bullet small-list">
             <li>City</li>
             <li>DateTime</li>
             <li>Hourly Weather Data</li>
               <ul>
-                <li>temperature</li>
-                <li>precipitation</li>
-                <li>humidity</li>
-                <li>wind speed</li>
-                <li>wind direction</li>
+                <li>Temperature</li>
+                <li>Precipitation</li>
+                <li>Humidity</li>
+                <li>Wind speed</li>
+                <li>Wind direction</li>
               </ul>
           </ul>
         </section>
 
         <section>
 <pre><code class="stretch">
+  //data is a blob of weather data fetched by the Route
   App.WeatherController = Ember.Controller.extend({
 
     cityName: "Chicago",
+
     activeDateTime: Date.now(),
+
     activeDaysData: function () {
       var activeDateTime = this.get('activeDateTime')
         , data = this.get('data');
       this.get('data').filterProperty('date', activeDateTime);
     }.property('activeDateTime', 'data'),
 
-    apiString: "fancyWeather.api.com/",
     inMetric: true,
-
-    fetchData: function () {
-      var cityName = this.get('cityName')
-        , settings = this.get('settings') //ajax settings
-        , dateTime = this.get('activeDateTime')
-        , apiString = this.get('apiString');
-
-      $.ajax(apiString+cityName+"/"+currentDateTime, settings)
-        .done(this.loadData.bind(this));
-        .fail(this.raiseError.bind(this));
     }
   });
 </code></pre>
@@ -577,11 +572,13 @@
           <h3>Weather Graph Component</h3> 
           <p>Computes/displays range of a type of data</p>
           <p>State change will cause graph to render new Data</p>
-          <p>We could further enhance this component by passing in 
-            a range of hours, a scale, or even display properties</p>
 <pre><code>
   {{weather-graph data=activeDaysData state=state isMetric=isMetric}}
 </code></pre>
+          <footer><small class="emphasis">
+            We could further enhance this component by passing in 
+            a range of hours, a scale, or even display properties
+          </small></footer>
         </section>
 
 
@@ -601,10 +598,12 @@
 
 
         <section>
-          <h2>Benefit of this arrangement</h2>
+          <h2>Benefits of this arrangement</h2>
           <p>
-            Graph component may be re-used elsewhere and may have its state
-            hardcoded or driven by some other form of input
+            Graph component may be used elsewhere and have its state driven by other means
+          </p>
+          <p>
+            Controls component may be used to drive some other state, perhaps tabs?
           </p>
         </section>
 
@@ -640,6 +639,8 @@
         <section>
           <h2>Benefit of this arrangement</h2>
           <p>Daily overview component may be used elsewhere</p>
+          <p>Weekly overview is concerned with determining list of daily data</p>
+          <p>Daily overview is concerned with computing/displaying daily data</p>
         </section>
 
         <section>
