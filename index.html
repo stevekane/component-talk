@@ -453,7 +453,7 @@
             <li>DateTime</li>
             <li>Hourly Weather Data</li>
               <ul>
-                <li>temderature</li>
+                <li>temperature</li>
                 <li>precipitation</li>
                 <li>humidity</li>
                 <li>wind speed</li>
@@ -611,13 +611,19 @@
 
         <section>
           <h2>Extrapolation</h2> 
-          <p>The remaining data is a list of daily overviews</p>
           <p>Create a "daily overview" component</p>
-          <p class="emphasis">Clicking a "daily overview" will affect the activeDateTime</p>
           <p>
             Create a "weekly overview list" component that USES 
             the "daily overview" component in its template
           </p>
+<pre><code>
+  {{! weather-weekly-overview template }}
+
+  {{#each day in days}}
+    {{weather-daily-overview data=day.data}}
+  {{/each}}
+</code></pre>
+          <p class="emphasis">Clicking a "daily overview" will affect the activeDateTime</p>
         </section>
 
 
