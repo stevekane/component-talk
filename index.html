@@ -37,12 +37,6 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
         <section>
-          <h1>Angry Ball of Mud</h1>
-          <h3>Becky, does my controller look fat to you?</h3>
-        </section>
-
-
-        <section>
           <h2>Chicago Ember.js meetup 9/5</h2>
           <h4>Special Thanks to:</h4>
           <ul class="no-bullet small-list">
@@ -79,6 +73,47 @@
 
 
         <section>
+          <h1>Angry Ball of Mud</h1>
+          <h3>Becky, does my controller look fat to you?</h3>
+        </section>
+
+
+        <section>
+          <blockquote>Architecture is about intent, not your framework.</blockquote>
+          <small>-Bob Martin</small>
+        </section>
+
+
+        <section>
+          <blockquote>The boundaries of your program ARE your program in a very real sense.</blockquote>
+          <small>-Gary Bernhardt</small>
+        </section>
+
+
+        <section>
+          <blockquote>Divide and conquer.</blockquote>
+          <small>-Phillip II, King of Macedon</small>
+          
+        </section>
+
+
+        <section>
+          <blockquote>Be the ball Danny.  Be the ball.</blockquote>
+          <small>-Ty Webb (fictional philosopher)</small>
+        </section>
+
+
+        <section>
+          <img src="images/momjuggle.jpg"></img>
+        </section>
+
+
+        <section>
+          <img src="images/easyjuggle.jpg"></img>
+        </section>
+
+
+        <section>
           <h2>SRP (ya, you know me)</h2>
           <blockquote>
             Every class should have a single responsibility and that responsibility should be
@@ -111,6 +146,11 @@
             Composable systems provide recombinant components that can be selected and
             assembled in combinations to satisfy variable requirements.
           </blockquote>
+        </section>
+
+
+        <section>
+          <img src="images/motherboard.png"></img>
         </section>
 
 
@@ -488,6 +528,11 @@
       
 
         <section>
+          <img src="images/weather_base/daily_graph_parent.jpg"></img>
+        </section>
+
+
+        <section>
           <h2>Weather Graph Wrapper</h2>
           <p>Has an internal state to track what is being displayed</p>
           <p>Contains "controls" component and "graph component"</p>
@@ -496,18 +541,33 @@
 </code></pre>
         </section>
 
+
+        <section>
+          <img src="images/weather_base/daily_graph_child.jpg"></img>
+        </section>
+
+
         <section>
           <h3>Weather Graph Component</h3> 
           <p>Computes/displays range of a type of data</p>
           <p>State change will cause graph to render new Data</p>
+          <p>We could further enhance this component by passing in 
+            a range of hours, a scale, or even display properties</p>
 <pre><code>
-  {{weather-graph data=activeDaysData isMetric=isMetric state=state}}
+  {{weather-graph data=activeDaysData state=state isMetric=isMetric}}
 </code></pre>
         </section>
+
+
+        <section>
+          <img src="images/weather_base/daily_graph_controls.jpg"></img>
+        </section>
+
 
         <section>
           <h3>Weather Graph Controls</h3> 
           <p class="emphasis">Changes "state" based on clickable buttons</p>
+          <p>NOTE: this is really just a set of "tabs" and could be further generalized</p>
 <pre><code>
   {{weather-graph state=state}}
 </code></pre>
@@ -536,6 +596,16 @@
 
 
         <section>
+          <img src="images/weather_base/daily_summary_list_parent.jpg"></img>
+        </section>
+
+
+        <section>
+          <img src="images/weather_base/daily_summary_list_child.jpg"></img>
+        </section>
+
+
+        <section>
           <h2>Benefit of this arrangement</h2>
           <p>Daily overview component may be used elsewhere</p>
         </section>
@@ -546,6 +616,11 @@
             Let's group the first three components into "overview wrapper" component
             as we have done in with the previous arrangements
           </p>
+        </section>
+
+
+        <section>
+          <img src="images/weather_base/weather_overview_parent.jpg"></img>
         </section>
 
 
