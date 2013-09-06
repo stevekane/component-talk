@@ -226,7 +226,7 @@
         this.incrementProperty('msViewed', deltaMs);
         this.set('oldtime', newtime);
       }, 500);
-    }.on('didinsertelement')
+    }.on('didInsertElement')
   });
 </code></pre>
         </section>
@@ -383,7 +383,7 @@
         <section>
           <h2>Bound properties</h2> 
 <pre><code class="stretch">
-  {{our-timetracker action="logtimestamp" msviewed=msonpage}}
+  {{our-timetracker action="logTimeStamp" msViewed=view.msOnPage}}
 </code></pre>
 <p>
   changes to bound properties are propagated to every part of your
@@ -480,7 +480,7 @@
       this.get('data').filterProperty('date', activeDateTime);
     }.property('activeDateTime', 'data'),
 
-    inMetric: true,
+    isMetric: true,
     }
   });
 </code></pre>
@@ -569,7 +569,7 @@
 
 
         <section>
-          <h3>Weather Graph Component</h3> 
+          <h3>Weather Graph</h3> 
           <p>Computes/displays range of a type of data</p>
           <p>State change will cause graph to render new Data</p>
 <pre><code>
@@ -592,7 +592,7 @@
           <p class="emphasis">Changes "state" based on clickable buttons</p>
           <p>NOTE: this is really just a set of "tabs" and could be further generalized</p>
 <pre><code>
-  {{weather-graph state=state}}
+  {{weather-graph-controls state=state}}
 </code></pre>
         </section>
 
